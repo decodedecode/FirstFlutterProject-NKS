@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Arihant Sample Paper",
+      "desc": "Book for exam preparation",
+      "price": 200,
+      "color": "#33505A",
+      "image": "https://m.media-amazon.com/images/I/516vG1H5TNL._SX342_SY445_.jpg"
+    },
+    {
+      "id": 2,
+      "name": "The Alchemist",
+      "desc": "A novel by Paulo Coelho",
+      "price": 299,
+      "color": "#FF5733",
+      "image": "https://m.media-amazon.com/images/I/51Z0nLAfLmL.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Indian Polity",
+      "desc": "A book by M. Laxmikanth",
+      "price": 550,
+      "color": "#1ABC9C",
+      "image": "https://m.media-amazon.com/images/I/71CrTyKsazL._SY342_.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Rich Dad Poor Dad",
+      "desc": "A book by Robert T. Kiyosaki",
+      "price": 399,
+      "color": "#8E44AD",
+      "image": "https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Think and Grow Rich",
+      "desc": "A book by Napoleon Hill",
+      "price": 199,
+      "color": "#2980B9",
+      "image": "https://m.media-amazon.com/images/I/81eB+7+CkUL.jpg"
+    },
+    {
+      "id": 6,
+      "name": "To Kill a Mockingbird",
+      "desc": "A novel by Harper Lee",
+      "price": 349,
+      "color": "#FFC300",
+      "image": "https://m.media-amazon.com/images/I/81OthjkJBuL.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Pride and Prejudice",
+      "desc": "A novel by Jane Austen",
+      "price": 199,
+      "color": "#FF5733",
+      "image": "https://m.media-amazon.com/images/I/91HHqVTAJQL.jpg"
+    }
+  ]
+}

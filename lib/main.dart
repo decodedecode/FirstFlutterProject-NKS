@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
+import 'package:pilot/pages/cart_page.dart';
+import 'package:pilot/core/store.dart';
+import 'package:pilot/pages/home_page.dart';
+import 'package:pilot/pages/login_page.dart';
+import 'package:pilot/utils/routes.dart';
+import 'package:pilot/utils/widgets/themes.dart';
 
 void main() {
-  runApp(const MyApp());
+  // Initialize the store
+  final store = MyStore();
+
+  runApp(VxState(
+    store: store, // Pass the store here
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Material(
-        child: Center(
-          child: Container(
-            child: Text("Wassup Bitches how are you bruh"),
-          ),
-        ),
-      ),
+      themeMode: ThemeMode.system,
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
+      debugShowCheckedModeBanner: false,
+      initialRoute: MyRoutes.homeRoute,
+      routes: {
+        "/": (context) => LoginPage(),
+        MyRoutes.homeRoute: (context) => HomePage(),
+        MyRoutes.loginRoute: (context) => LoginPage(),
+        MyRoutes.cartRoute: (context) => CartPage(),
+      },
     );
   }
 }
