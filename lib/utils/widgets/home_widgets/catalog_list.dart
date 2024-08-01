@@ -1,80 +1,100 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:convert';
 import 'package:pilot/models/catalog.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:pilot/pages/home_detail_page.dart';
-import 'package:pilot/utils/routes.dart';
-import 'package:pilot/utils/widgets/drawer.dart';
-import 'package:pilot/utils/widgets/home_widgets/catalog_header.dart';
-import 'package:pilot/utils/widgets/home_widgets/catalog_list.dart';
-import 'package:pilot/utils/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import 'add_to_cart.dart';
 import 'catalog_image.dart';
 
 class CatalogList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: CatalogModel.items.length,
-      itemBuilder: (context, index) {
-        final catalog = CatalogModel.items[index];
-        return InkWell(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomeDetailPage(catalog: catalog),
-            ),
-          ),
-          child: CatalogItem(catalog: catalog),
-        );
-      },
-    );
+    return !context.isMobile
+        ? GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, crossAxisSpacing: 20.0),
+            shrinkWrap: true,
+            itemCount: CatalogModel.items.length,
+            itemBuilder: (context, index) {
+              final catalog = CatalogModel.items[index];
+              return InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeDetailPage(catalog: catalog),
+                  ),
+                ),
+                child: CatalogItem(catalog: catalog),
+              );
+            },
+          )
+        : ListView.builder(
+            shrinkWrap: true,
+            itemCount: CatalogModel.items.length,
+            itemBuilder: (context, index) {
+              final catalog = CatalogModel.items[index];
+              return InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeDetailPage(catalog: catalog),
+                  ),
+                ),
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                child: CatalogItem(catalog: catalog),
+              );
+            },
+          );
   }
 }
 
 class CatalogItem extends StatelessWidget {
   final Item catalog;
 
-  const CatalogItem({Key? key, required this.catalog})
-      : assert(catalog != null),
-        super(key: key);
+  const CatalogItem({Key? key, required this.catalog}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return VxBox(
-      child: Row(
-        children: [
-          Hero(
-            tag: Key(catalog.id.toString()),
-            child: CatalogImage(
-              image: catalog.image,
-            ),
-          ),
-          Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  catalog.name.text.lg.color(context.accentColor).bold.make(),
-                  catalog.desc.text.textStyle(context.captionStyle).make(),
-                  10.heightBox,
-                  ButtonBar(
-                    alignment: MainAxisAlignment.spaceBetween,
-                    buttonPadding: EdgeInsets.zero,
-                    children: [
-                      "\$${catalog.price}".text.bold.xl.make(),
-                      AddToCart(catalog: catalog)
-                    ],
-                  ).pOnly(right: 8.0)
-                ],
-              ))
-        ],
+    var children2 = [
+      Hero(
+        tag: Key(catalog.id.toString()),
+        child: CatalogImage(
+          image: catalog.image,
+        ),
       ),
-    ).color(context.cardColor).rounded.square(150).make().py16();
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            catalog.name.text.xl.color(context.accentColor).bold.make().py20(),
+            // Wrap the description text with a SingleChildScrollView
+            SingleChildScrollView(
+              child:
+                  catalog.desc.text.sm.textStyle(context.captionStyle).make(),
+            ).expand(),
+            // Ensure the SingleChildScrollView takes available space
+            10.heightBox,
+            ButtonBar(
+              alignment: MainAxisAlignment.spaceBetween,
+              buttonPadding: EdgeInsets.zero,
+              children: [
+                "\$${catalog.price}".text.bold.xl.make(),
+                AddToCart(catalog: catalog),
+              ],
+            ).p12(),
+          ],
+        ).p(context.isMobile ? 0 : 16),
+      ),
+    ];
+    return VxBox(
+      child: context.isMobile
+          ? Row(
+              children: children2,
+            )
+          : Column(
+              children: children2,
+            ),
+    ).color(context.cardColor).rounded.square(200).make().py16();
   }
 }

@@ -23,7 +23,8 @@ class _LoginPageState extends State<LoginPage> {
         changeButton = true;
       });
       await Future.delayed(Duration(seconds: 1));
-      Navigator.pushNamed(context, MyRoutes.homeRoute);
+      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+
       setState(() {
         changeButton = false;
       });
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: context.canvasColor,
+      color: MyTheme.backgroundColor,
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -42,19 +43,17 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: Image.asset(
-
                   "assets/images/login.png",
                   fit: BoxFit.fitWidth,
                 ).py16(),
               ),
-              SizedBox(
-                height: 20.0,
-              ),
+              SizedBox(height: 20.0),
               Text(
                 "Welcome, $name",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
+                  color: MyTheme.primaryColor,
                 ),
               ),
               Padding(
@@ -68,6 +67,11 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         hintText: "Enter Username",
                         labelText: "Username",
+                        labelStyle: TextStyle(color: MyTheme.darkColor),
+                        hintStyle: TextStyle(color: MyTheme.lightColor),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: MyTheme.primaryColor),
+                        ),
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -85,6 +89,11 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         hintText: "Enter Password",
                         labelText: "Password",
+                        labelStyle: TextStyle(color: MyTheme.darkColor),
+                        hintStyle: TextStyle(color: MyTheme.lightColor),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: MyTheme.primaryColor),
+                        ),
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -95,17 +104,11 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
+                    SizedBox(height: 50.0),
                     Material(
                       borderRadius:
-                          BorderRadius.circular(changeButton ? 50 : 8),
-                      color: Theme.of(context)
-                              .buttonTheme
-                              .colorScheme
-                              ?.background ??
-                          MyTheme.darkBluishColor,
+                      BorderRadius.circular(changeButton ? 50 : 8),
+                      color: MyTheme.primaryColor,
                       child: InkWell(
                         onTap: () => moveToHome(context),
                         child: AnimatedContainer(
@@ -115,17 +118,17 @@ class _LoginPageState extends State<LoginPage> {
                           alignment: Alignment.center,
                           child: changeButton
                               ? Icon(
-                                  Icons.done,
-                                  color: Colors.white,
-                                )
+                            Icons.done,
+                            color: Colors.white,
+                          )
                               : Text(
-                                  "Login",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
                         ),
                       ),
                     ),

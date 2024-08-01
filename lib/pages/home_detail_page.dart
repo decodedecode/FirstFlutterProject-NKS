@@ -1,23 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:convert';
 import 'package:pilot/models/catalog.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
-import 'package:pilot/utils/routes.dart';
-import 'package:pilot/utils/widgets/drawer.dart';
 import 'package:pilot/utils/widgets/home_widgets/add_to_cart.dart';
-import 'package:pilot/utils/widgets/home_widgets/catalog_header.dart';
-import 'package:pilot/utils/widgets/home_widgets/catalog_list.dart';
-import 'package:pilot/utils/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeDetailPage extends StatelessWidget {
   final Item catalog;
 
   const HomeDetailPage({Key? key, required this.catalog})
-      : assert(catalog != null),
-        super(key: key);
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

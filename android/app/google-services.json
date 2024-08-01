@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "146754536995",
+    "project_id": "nkbs-sdl",
+    "storage_bucket": "nkbs-sdl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146754536995:android:5bd8f78776ffa481865396",
+        "android_client_info": {
+          "package_name": "com.sunday.pilot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSWyGC8-BxacPHSBlJMyaHrrPgEr3_Td0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
